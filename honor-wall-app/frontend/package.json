@@ -1,0 +1,29 @@
+{
+  "name": "honor-wall-app",
+  "version": "1.0.0",
+  "description": "A simple honor wall application to showcase achievements and rankings.",
+  "main": "src/main.ts",
+  "scripts": {
+    "serve": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.0",
+    "vue-router": "^4.0.0",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "vite": "^2.0.0",
+    "typescript": "^4.0.0",
+    "sass": "^1.32.0"
+  },
+  "keywords": [
+    "honor",
+    "wall",
+    "vue",
+    "vite"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
