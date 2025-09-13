@@ -94,9 +94,7 @@
             </div>
             <div class="hidden md:flex items-center space-x-6">
                 <a href="#" class="text-gray-600 hover:text-primary transition-colors">首页</a>
-                <a href="#features" class="text-gray-600 hover:text-primary transition-colors">功能</a>
                 <a href="#demo" class="text-gray-600 hover:text-primary transition-colors">演示</a>
-                <a href="#docs" class="text-gray-600 hover:text-primary transition-colors">文档</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden text-gray-600">
                 <i class="fa fa-bars text-xl"></i>
@@ -106,9 +104,7 @@
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
             <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
                 <a href="#" class="text-gray-600 hover:text-primary py-2 transition-colors">首页</a>
-                <a href="#features" class="text-gray-600 hover:text-primary py-2 transition-colors">功能</a>
                 <a href="#demo" class="text-gray-600 hover:text-primary py-2 transition-colors">演示</a>
-                <a href="#docs" class="text-gray-600 hover:text-primary py-2 transition-colors">文档</a>
             </div>
         </div>
     </header>
@@ -125,34 +121,6 @@
             </p>
         </section>
 
-        <!-- 功能介绍 -->
-        <section id="features" class="mb-16">
-            <h2 class="text-2xl font-bold text-dark mb-8 text-center">核心功能</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl shadow-md p-6 text-center comment-hover">
-                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa fa-cloud text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">云端存储</h3>
-                    <p class="text-gray-600">支持多种云平台部署，包括Vercel、Cloudflare、腾讯云等。</p>
-                </div>
-                <div class="bg-white rounded-xl shadow-md p-6 text-center comment-hover">
-                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa fa-shield text-2xl text-secondary"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">安全可靠</h3>
-                    <p class="text-gray-600">提供内容审核、防垃圾评论等安全特性，保护你的评论区。</p>
-                </div>
-                <div class="bg-white rounded-xl shadow-md p-6 text-center comment-hover">
-                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa fa-paint-brush text-2xl text-accent"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">美观定制</h3>
-                    <p class="text-gray-600">完全可定制的界面，支持多种主题和个性化设置。</p>
-                </div>
-            </div>
-        </section>
-
         <!-- 评论区演示 -->
         <section id="demo" class="mb-16">
             <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
@@ -163,9 +131,8 @@
                 
                 <!-- 模拟文章内容 -->
                 <div class="mb-10">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">示例文章：如何使用Twikoo评论系统</h3>
-                    <p class="text-gray-600 mb-4">Twikoo是一个简洁、安全、免费的评论系统，支持多种平台部署。本文将介绍如何在你的网站上集成Twikoo评论系统。</p>
-                    <p class="text-gray-600">Twikoo的主要特点包括：无后端依赖、支持Markdown、支持代码高亮、支持表情、支持邮件通知、支持数据导出、支持自定义样式等。</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">示例文章</h3>
+                    <p class="text-gray-600 mb-4">这是一篇示例文章，欢迎在下方评论区留下你的想法和反馈。</p>
                 </div>
                 
                 <!-- 评论区容器 -->
@@ -180,52 +147,7 @@
             </div>
         </section>
 
-        <!-- 部署文档 -->
-        <section id="docs" class="mb-16">
-            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
-                <h2 class="text-2xl font-bold text-dark mb-6">部署指南</h2>
-                <div class="space-y-6">
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">1. 准备工作</h3>
-                        <p class="text-gray-600 mb-2">在开始部署前，你需要准备以下内容：</p>
-                        <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1">
-                            <li>一个支持的云平台账号（如Vercel、Cloudflare、腾讯云等）</li>
-                            <li>你的网站域名</li>
-                            <li>基本的HTML/CSS知识</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">2. 部署服务端</h3>
-                        <p class="text-gray-600 mb-2">根据你选择的平台，参考官方文档部署Twikoo服务端：</p>
-                        <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1">
-                            <li><a href="https://twikoo.js.org/guide/deploy.html#vercel" class="text-primary hover:underline">Vercel 部署</a></li>
-                            <li><a href="https://twikoo.js.org/guide/deploy.html#cloudflare-pages" class="text-primary hover:underline">Cloudflare Pages 部署</a></li>
-                            <li><a href="https://twikoo.js.org/guide/deploy.html#腾讯云开发" class="text-primary hover:underline">腾讯云开发 部署</a></li>
-                            <li><a href="https://twikoo.js.org/guide/deploy.html#其他平台" class="text-primary hover:underline">其他平台 部署</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">3. 集成到网站</h3>
-                        <p class="text-gray-600 mb-2">在你的网站页面中添加以下代码：</p>
-                        <div class="bg-gray-100 p-4 rounded-lg overflow-x-auto">
-                            <pre class="text-sm text-gray-800"><code>&lt;!-- 引入 Twikoo --&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.16/dist/twikoo.all.min.js"&gt;&lt;/script&gt;
-&lt;!-- 初始化 Twikoo --&gt;
-&lt;script&gt;
-  twikoo.init({
-    envId: '你的环境ID', // 从你部署的服务端获取
-    el: '#twikoo-container', // 评论区容器
-  })
-&lt;/script&gt;</code></pre>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">4. 配置管理员</h3>
-                        <p class="text-gray-600">部署完成后，首次评论的用户将自动成为管理员。登录后，你可以在评论区设置中管理评论、配置系统参数等。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+
     </main>
 
     <!-- 页脚 -->
