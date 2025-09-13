@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twikoo评论系统</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 自定义配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F9FAFB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .comment-shadow {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            .comment-hover {
+                transition: all 0.3s ease;
+            }
+            .comment-hover:hover {
+                transform: translateX(4px);
+            }
+            .btn-effect {
+                transition: all 0.3s ease;
+            }
+            .btn-effect:hover {
+                transform: translateY(-2px);
+            }
+            .btn-effect:active {
+                transform: translateY(0);
+            }
+            .fade-in {
+                animation: fadeIn 0.5s ease-in-out;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            .slide-up {
+                animation: slideUp 0.5s ease-out;
+            }
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .pulse {
+                animation: pulse 1.5s infinite;
+            }
+            @keyframes pulse {
+                0%, 100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.5;
+                }
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-comments text-2xl text-primary"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-dark">Twikoo评论系统</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors">首页</a>
+                <a href="#features" class="text-gray-600 hover:text-primary transition-colors">功能</a>
+                <a href="#demo" class="text-gray-600 hover:text-primary transition-colors">演示</a>
+                <a href="#docs" class="text-gray-600 hover:text-primary transition-colors">文档</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </nav>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#" class="text-gray-600 hover:text-primary py-2 transition-colors">首页</a>
+                <a href="#features" class="text-gray-600 hover:text-primary py-2 transition-colors">功能</a>
+                <a href="#demo" class="text-gray-600 hover:text-primary py-2 transition-colors">演示</a>
+                <a href="#docs" class="text-gray-600 hover:text-primary py-2 transition-colors">文档</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 欢迎横幅 -->
+        <section class="mb-12 text-center">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold text-dark mb-4 slide-up">
+                简洁美观的评论系统
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto slide-up" style="animation-delay: 0.2s;">
+                基于Twikoo构建的现代化评论系统，提供流畅的用户体验和精美的界面设计。
+            </p>
+        </section>
+
+        <!-- 功能介绍 -->
+        <section id="features" class="mb-16">
+            <h2 class="text-2xl font-bold text-dark mb-8 text-center">核心功能</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-md p-6 text-center comment-hover">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-cloud text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">云端存储</h3>
+                    <p class="text-gray-600">支持多种云平台部署，包括Vercel、Cloudflare、腾讯云等。</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 text-center comment-hover">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-shield text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">安全可靠</h3>
+                    <p class="text-gray-600">提供内容审核、防垃圾评论等安全特性，保护你的评论区。</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 text-center comment-hover">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-paint-brush text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">美观定制</h3>
+                    <p class="text-gray-600">完全可定制的界面，支持多种主题和个性化设置。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 评论区演示 -->
+        <section id="demo" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-dark mb-2">评论区演示</h2>
+                    <p class="text-gray-600">这是一个基于Twikoo的评论系统演示，请在下方体验评论功能。</p>
+                </div>
+                
+                <!-- 模拟文章内容 -->
+                <div class="mb-10">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">示例文章：如何使用Twikoo评论系统</h3>
+                    <p class="text-gray-600 mb-4">Twikoo是一个简洁、安全、免费的评论系统，支持多种平台部署。本文将介绍如何在你的网站上集成Twikoo评论系统。</p>
+                    <p class="text-gray-600">Twikoo的主要特点包括：无后端依赖、支持Markdown、支持代码高亮、支持表情、支持邮件通知、支持数据导出、支持自定义样式等。</p>
+                </div>
+                
+                <!-- 评论区容器 -->
+                <div id="twikoo-container" class="mt-8">
+                    <!-- 加载动画 -->
+                    <div id="loading-indicator" class="flex flex-col items-center justify-center py-10">
+                        <div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+                        <p class="text-gray-500 pulse">评论加载中...</p>
+                    </div>
+                    <!-- Twikoo 会在这里自动渲染评论区 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 部署文档 -->
+        <section id="docs" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-dark mb-6">部署指南</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">1. 准备工作</h3>
+                        <p class="text-gray-600 mb-2">在开始部署前，你需要准备以下内容：</p>
+                        <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1">
+                            <li>一个支持的云平台账号（如Vercel、Cloudflare、腾讯云等）</li>
+                            <li>你的网站域名</li>
+                            <li>基本的HTML/CSS知识</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">2. 部署服务端</h3>
+                        <p class="text-gray-600 mb-2">根据你选择的平台，参考官方文档部署Twikoo服务端：</p>
+                        <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1">
+                            <li><a href="https://twikoo.js.org/guide/deploy.html#vercel" class="text-primary hover:underline">Vercel 部署</a></li>
+                            <li><a href="https://twikoo.js.org/guide/deploy.html#cloudflare-pages" class="text-primary hover:underline">Cloudflare Pages 部署</a></li>
+                            <li><a href="https://twikoo.js.org/guide/deploy.html#腾讯云开发" class="text-primary hover:underline">腾讯云开发 部署</a></li>
+                            <li><a href="https://twikoo.js.org/guide/deploy.html#其他平台" class="text-primary hover:underline">其他平台 部署</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">3. 集成到网站</h3>
+                        <p class="text-gray-600 mb-2">在你的网站页面中添加以下代码：</p>
+                        <div class="bg-gray-100 p-4 rounded-lg overflow-x-auto">
+                            <pre class="text-sm text-gray-800"><code>&lt;!-- 引入 Twikoo --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.16/dist/twikoo.all.min.js"&gt;&lt;/script&gt;
+&lt;!-- 初始化 Twikoo --&gt;
+&lt;script&gt;
+  twikoo.init({
+    envId: '你的环境ID', // 从你部署的服务端获取
+    el: '#twikoo-container', // 评论区容器
+  })
+&lt;/script&gt;</code></pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">4. 配置管理员</h3>
+                        <p class="text-gray-600">部署完成后，首次评论的用户将自动成为管理员。登录后，你可以在评论区设置中管理评论、配置系统参数等。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i class="fa fa-comments text-xl"></i>
+                        <h3 class="text-lg font-bold">Twikoo评论系统</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">简洁、安全的评论系统解决方案</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/imaegoo/twikoo" class="text-gray-400 hover:text-white transition-colors" target="_blank">
+                        <i class="fa fa-github"></i>
+                    </a>
+                    <a href="https://twikoo.js.org/" class="text-gray-400 hover:text-white transition-colors" target="_blank">
+                        <i class="fa fa-book"></i>
+                    </a>
+                    <a href="https://twitter.com" class="text-gray-400 hover:text-white transition-colors" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 Twikoo评论系统演示. 基于 <a href="https://twikoo.js.org/" class="text-primary hover:underline" target="_blank">Twikoo</a> 构建.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // 初始化Twikoo评论系统
+        function initTwikoo() {
+            // 检查Twikoo是否已加载
+            if (typeof twikoo !== 'undefined') {
+                try {
+                    twikoo.init({
+                        // 这里使用Vercel上部署的演示服务端，实际使用时请替换为你自己的服务端
+                        envId: 'https://twikoo-demo.vercel.app',
+                        el: '#twikoo-container',
+                        // 自定义配置
+                        lang: 'zh-CN',
+                        path: location.pathname,
+                        // 加载完成回调
+                        onLoad: function() {
+                            // 隐藏加载指示器
+                            const loadingIndicator = document.getElementById('loading-indicator');
+                            if (loadingIndicator) {
+                                loadingIndicator.classList.add('fade-out');
+                                setTimeout(() => {
+                                    loadingIndicator.style.display = 'none';
+                                }, 500);
+                            }
+                            console.log('Twikoo评论系统加载完成');
+                        },
+                        // 评论提交成功回调
+                        onCommentLoaded: function() {
+                            console.log('评论数据加载完成');
+                        }
+                    });
+                } catch (error) {
+                    console.error('Twikoo初始化失败:', error);
+                    // 显示错误信息
+                    const container = document.getElementById('twikoo-container');
+                    if (container) {
+                        container.innerHTML = `
+                            <div class="text-center py-10">
+                                <i class="fa fa-exclamation-circle text-3xl text-red-500 mb-3"></i>
+                                <p class="text-gray-500">评论系统加载失败，请稍后重试</p>
+                            </div>
+                        `;
+                    }
+                }
+            } else {
+                // 如果Twikoo尚未加载，延迟重试
+                setTimeout(initTwikoo, 300);
+            }
+        }
+
+        // 添加加载失败时的备用样式
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                .fade-out {
+                    animation: fadeOut 0.5s ease-in-out;
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+                /* Twikoo 评论框样式定制 */
+                :root {
+                    --twikoo-theme-color: #3B82F6;
+                    --twikoo-border-color: #E5E7EB;
+                    --twikoo-bg-color: #FFFFFF;
+                    --twikoo-text-color: #374151;
+                    --twikoo-light-text: #6B7280;
+                    --twikoo-bg-hover: #F9FAFB;
+                }
+                .tk-comments { margin-top: 20px; }
+                .tk-comment { margin-top: 16px; border-radius: 8px; }
+                .tk-comment:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+                .tk-avatar { width: 42px; height: 42px; border-radius: 50%; }
+                .tk-name { font-weight: 600; color: var(--twikoo-text-color); }
+                .tk-content { line-height: 1.6; margin-top: 8px; color: var(--twikoo-text-color); }
+                .tk-time { font-size: 14px; color: var(--twikoo-light-text); margin-top: 8px; }
+                .tk-action-bar { margin-top: 8px; }
+                .tk-btn { padding: 4px 12px; border-radius: 6px; transition: all 0.3s ease; }
+                .tk-btn:hover { transform: translateY(-1px); }
+                .tk-submit {
+                    background-color: var(--twikoo-theme-color);
+                    color: white;
+                    padding: 8px 20px;
+                    border-radius: 6px;
+                    transition: all 0.3s ease;
+                }
+                .tk-submit:hover {
+                    background-color: #2563EB;
+                    transform: translateY(-1px);
+                }
+                .tk-editor {
+                    border-radius: 8px;
+                    border: 1px solid var(--twikoo-border-color);
+                    transition: all 0.3s ease;
+                }
+                .tk-editor:focus-within {
+                    border-color: var(--twikoo-theme-color);
+                    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+                }
+            </style>
+        `);
+
+        // 页面加载完成后初始化Twikoo
+        document.addEventListener('DOMContentLoaded', function() {
+            // 动态加载Twikoo脚本
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.16/dist/twikoo.all.min.js';
+            script.onload = function() {
+                console.log('Twikoo脚本加载完成');
+                initTwikoo();
+            };
+            script.onerror = function() {
+                console.error('Twikoo脚本加载失败');
+                // 显示错误信息
+                const container = document.getElementById('twikoo-container');
+                const loadingIndicator = document.getElementById('loading-indicator');
+                if (container && loadingIndicator) {
+                    loadingIndicator.innerHTML = `
+                        <i class="fa fa-exclamation-circle text-3xl text-red-500 mb-3"></i>
+                        <p class="text-gray-500">评论系统加载失败，请检查网络连接</p>
+                    `;
+                    loadingIndicator.classList.remove('pulse');
+                }
+            };
+            document.body.appendChild(script);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "twikoo-comment-system",
+  "version": "1.0.0",
+  "description": "A comment system based on Twikoo with a smooth loading animation and beautiful styles using Tailwind CSS.",
+  "main": "src/main.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "webpack serve --mode development",
+    "build:prod": "webpack --mode production"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "twikoo": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4",
+    "tailwindcss": "^2.2.19",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "keywords": [
+    "comment",
+    "system",
+    "twikoo",
+    "react",
+    "tailwindcss"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
